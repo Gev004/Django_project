@@ -1,0 +1,42 @@
+{% extends "shopapp/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block body %}
+    <h2>{{ product.name }}</h2>
+    <p>{% translate "Price" %}: {{ product.price }} $</p>
+    <p>
+        {% blocktranslate %}
+            Description: {{ product.description }}
+        {% endblocktranslate %}
+    </p>
+
+    <p>
+        <a href="{% url 'shopapp:products_list' %}">
+            {% translate "← Back to product list" %}
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'shopapp:update_product' pk=product.pk %}">
+            {% translate "Update Product" %}
+        </a>
+    </p>
+
+    <p>
+        <a href="{% url 'shopapp:archive_product' pk=product.pk %}">
+            {% translate "Archive Product" %}
+        </a>
+    </p>
+
+
+    {% blocktranslate count order_count=product.orders.count %}
+        This product is used in {{ order_count }} order.
+    {% plural %}
+        This product is used in {{ order_count }} orders.
+    {% endblocktranslate %}
+
+{% endblock %}

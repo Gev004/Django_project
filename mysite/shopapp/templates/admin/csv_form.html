@@ -1,0 +1,13 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+  <h1>{{ title }}</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Импортировать заказы">
+  </form>
+  <br>
+  <a href="{% url 'admin:shopapp_order_changelist' %}">← Back yo order list</a>
+{% endblock %}

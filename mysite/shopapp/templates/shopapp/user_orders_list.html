@@ -1,0 +1,25 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %}
+Orders
+{% endblock %}
+
+{% block body %}
+<h2>
+    {% if orders %}
+        User {{ owner.username }} has done the following orders:
+    {% else %}
+        User {{ owner.username }} has no orders.
+    {% endif %}
+</h2>
+
+{% load cache %}
+<ul>
+    {% for order in orders %}
+        <li>
+            <a href="{% url 'shopapp:order_detail' pk=order.pk %}">Order №{{ order.pk }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endcache %}
+{% endblock %}
